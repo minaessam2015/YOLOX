@@ -33,8 +33,8 @@ class Exp(BaseExp):
         # You can uncomment this line to specify a multiscale range
         # self.random_size = (14, 26)
         self.data_dir = None
-        self.train_ann = "instances_train2017.json"
-        self.val_ann = "instances_val2017.json"
+        self.train_ann = "instances_train2014.json"
+        self.val_ann = "instances_val2014.json"
 
         # --------------- transform config ----------------- #
         self.mosaic_prob = 1.0
@@ -111,6 +111,7 @@ class Exp(BaseExp):
             dataset = COCODataset(
                 data_dir=self.data_dir,
                 json_file=self.train_ann,
+                name='train2014',
                 img_size=self.input_size,
                 preproc=TrainTransform(
                     max_labels=50,
@@ -243,7 +244,7 @@ class Exp(BaseExp):
         valdataset = COCODataset(
             data_dir=self.data_dir,
             json_file=self.val_ann if not testdev else "image_info_test-dev2017.json",
-            name="val2017" if not testdev else "test2017",
+            name="val2014" if not testdev else "test2014",
             img_size=self.test_size,
             preproc=ValTransform(legacy=legacy),
         )
